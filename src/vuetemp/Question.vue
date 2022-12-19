@@ -7,7 +7,7 @@
 
         <div class="area d-flex mb-24-px h-100-pct w-100-pct" v-if="currQuestion">
             <div class="content px-50-px align-self-center flex-grow-1 text-center">
-                <div class="fz-42-px text-right pr-30-px mb-10-px">
+                <div class="fz-42-px text-right pr-30-px mb-10-px" @click="onClickTestNext">
                     {{ '{' + typeTitle[currQuestion.type] + '（' + currQuestion.qnum + '）}' }}
                 </div>
                 <div class="q-area text-left"
@@ -25,7 +25,7 @@
                             <div class="squre"></div>
                         </div>
                     </div>
-                    <div class="btn" @click="onClickAnswerBtn();">
+                    <div class="btn" @click="onClickAnswerBtn">
                         <div class="left-bg">
                             <div class="squre"></div>
                         </div>
@@ -39,7 +39,7 @@
                     :class="[currQuestion.optionfz ? 'fz-' + currQuestion.optionfz + '-px' : 'fz-34-px']">
                     <span v-for="(option, index) in currQuestion.options" :key="index"
                         class="d-inlin-block px-16-px py-20-px d-flex option-area"
-                        :class="openAnswer? [index == currQuestion.answerIndex ? 'is-answer' : 'not-answer'] : null">
+                        :class="openAnswer ? [index == currQuestion.answerIndex ? 'is-answer' : 'not-answer'] : null">
                         <span class="d-inlin-block align-self-start">{{ optionsLabel[index] }}、</span>
                         <span class="d-inlin-block text-left">{{ option }}</span>
                     </span>
@@ -146,19 +146,6 @@ export default {
     methods: {
         playQuestionMusic() {
             this.$refs.questionAudio.play()
-            // if (this.currQuestionMusicIndex != -1 && this.currQuestionMusicIndex == index) {
-            //     this.currQuestionMusicIndex = -1
-            //     this.$refs.questionAudio.pause();
-            //     this.$refs.questionAudio.currentTime = 0;
-            // } else {
-            //     this.$refs.initAudio.pause();
-            //     this.currQuestionMusicIndex = index;
-            //     this.$refs.questionAudio.load()
-                
-            //     this.$refs.initAudio.onended = () => {
-            //         this.currQuestionMusicIndex = -1
-            //     }
-            // }
         },
         onClickAnswerBtn() {
             const music = this.currQuestion.musicFileNames[1];
@@ -168,10 +155,20 @@ export default {
                 } else {
                     this.$refs.answerAudio.pause()
                 }
-            } else {
+            } else if (!this.openAnswer) {
                 this.$refs.openAnswerSound.play();
             }
             this.openAnswerKey = `${this.currQuestionType}_${this.currQuestionId}`;
+        },
+        onClickTestNext() {
+            if (this.currQuestionId >= 14) {
+                const _keys = Object.keys(this.typeTitle);
+                const _findedIdx = _keys.findIndex(e => e == this.currQuestionType);
+                const selectQuestionType = (_findedIdx >= 3) ? _keys[0] : _keys[_findedIdx+1];
+                this.$store.commit('updateState', {selectQuestionIndex: 0, selectQuestionType, checked: false});
+            } else {
+                this.$store.commit('updateState', {selectQuestionIndex: this.currQuestionId+1, checked: false});
+            }
         }
     }
 

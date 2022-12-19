@@ -19,9 +19,9 @@ const store = createStore({
     state () {
       return {
         open: false,
-        checked: false,
-        selectQuestionIndex: 5,
-        selectQuestionType: 'LANGUAGE',
+        checked: true,
+        selectQuestionIndex: -1,
+        selectQuestionType: '',
         questionMap: {},
         lastMsg: {}
       }

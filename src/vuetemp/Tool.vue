@@ -184,6 +184,7 @@ export default {
           this.results.push(vs.map((e) => e.code))
           this.save()
           this.resetVsList()
+          this.$store.commit('updateState', {open: false});
         }
         this.tmpLock = false
       } else {
