@@ -1,0 +1,37 @@
+{
+  "name": "qr-qa-web",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "author": "snow",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "npx webpack serve",
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.2",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.7.2",
+    "node-sass": "^8.0.0",
+    "sass": "^1.56.2",
+    "sass-loader": "^13.2.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "lodash": "^4.17.21",
+    "socket.io": "^4.5.4",
+    "socket.io-client": "^4.5.4",
+    "typescript": "^4.9.4",
+    "vue": "^3.2.45",
+    "vue-loader": "^17.0.1",
+    "vue-router": "^4.1.6",
+    "vue-template-compiler": "^2.7.14",
+    "vuex": "^4.1.0",
+    "vuex-socketio": "^0.3.7"
+  }
+}

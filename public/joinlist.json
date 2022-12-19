@@ -1,0 +1,1139 @@
+[
+  [
+    {
+        "code": "R002",
+        "name": "張理查"
+    },
+    {
+        "code": "R001",
+        "name": "侯米奇"
+    },
+    {
+        "code": "R006",
+        "name": "全彼得"
+    },
+    {
+        "code": "R008",
+        "name": "黃龜龜"
+    },
+    {
+        "code": "R007",
+        "name": "林波奇"
+    },
+    {
+        "code": "R009",
+        "name": "楊哈子"
+    },
+    {
+        "code": "R011",
+        "name": "何噠噠"
+    },
+    {
+        "code": "R013",
+        "name": "焦婕西"
+    },
+    {
+        "code": "R015",
+        "name": "甘肯"
+    },
+    {
+        "code": "R017",
+        "name": "黃杰夫"
+    },
+    {
+        "code": "R018",
+        "name": "邱鬼客"
+    },
+    {
+        "code": "R021",
+        "name": "楊祿"
+    },
+    {
+        "code": "R024",
+        "name": "許瑞塔"
+    },
+    {
+        "code": "R023",
+        "name": "楊水晶"
+    },
+    {
+        "code": "R022",
+        "name": "林強壯"
+    },
+    {
+        "code": "R027",
+        "name": "林欣欣"
+    },
+    {
+        "code": "R026",
+        "name": "趙強森"
+    },
+    {
+        "code": "R031",
+        "name": "林桑"
+    },
+    {
+        "code": "R035",
+        "name": "陳羅壹"
+    },
+    {
+        "code": "R033",
+        "name": "朱凱文"
+    },
+    {
+        "code": "R037",
+        "name": "黃義鯊"
+    },
+    {
+        "code": "R040",
+        "name": "陳杰德"
+    },
+    {
+        "code": "R045",
+        "name": "張華特"
+    },
+    {
+        "code": "R044",
+        "name": "余鱗"
+    },
+    {
+        "code": "R043",
+        "name": "鄒墾丁"
+    },
+    {
+        "code": "R046",
+        "name": "林特"
+    },
+    {
+        "code": "R049",
+        "name": "宋萊恩"
+    },
+    {
+        "code": "R052",
+        "name": "林單單"
+    },
+    {
+        "code": "R050",
+        "name": "吳玫"
+    },
+    {
+        "code": "R056",
+        "name": "高茯苓"
+    },
+    {
+        "code": "R055",
+        "name": "譚雅各"
+    },
+    {
+        "code": "R053",
+        "name": "徐司"
+    },
+    {
+        "code": "R059",
+        "name": "陳爩繘戫"
+    },
+    {
+        "code": "R064",
+        "name": "程寶寶"
+    },
+    {
+        "code": "R067",
+        "name": "王福康"
+    },
+    {
+        "code": "R069",
+        "name": "許維克"
+    },
+    {
+        "code": "R075",
+        "name": "洪零"
+    },
+    {
+        "code": "R082",
+        "name": "林森"
+    },
+    {
+        "code": "R094",
+        "name": "王筆的"
+    },
+    {
+        "code": "R100",
+        "name": "葉威力"
+    },
+    {
+        "code": "R109",
+        "name": "李莫爾"
+    },
+    {
+        "code": "R113",
+        "name": "張灰"
+    },
+    {
+        "code": "R123",
+        "name": "賴克西亞"
+    },
+    {
+        "code": "R133",
+        "name": "李提姆"
+    },
+    {
+        "code": "R147",
+        "name": "蔡迪桑"
+    },
+    {
+        "code": "R164",
+        "name": "謝多南"
+    },
+    {
+        "code": "R179",
+        "name": "李維克"
+    },
+    {
+        "code": "R178",
+        "name": "陳苓苓"
+    },
+    {
+        "code": "R176",
+        "name": "于凱琳"
+    },
+    {
+        "code": "R185",
+        "name": "許亨利"
+    },
+    {
+        "code": "R187",
+        "name": "王大衛"
+    },
+    {
+        "code": "R192",
+        "name": "黃賓娜"
+    },
+    {
+        "code": "R198",
+        "name": "李戎龍"
+    },
+    {
+        "code": "R196",
+        "name": "柯安格斯"
+    },
+    {
+        "code": "R205",
+        "name": "方傑克"
+    },
+    {
+        "code": "R209",
+        "name": "郭棣"
+    },
+    {
+        "code": "R231",
+        "name": "李雪倫"
+    },
+    {
+        "code": "R230",
+        "name": "劉厄普頓"
+    },
+    {
+        "code": "R235",
+        "name": "曾吉米"
+    },
+    {
+        "code": "R246",
+        "name": "黃霍華德"
+    },
+    {
+        "code": "R251",
+        "name": "廖姆濕"
+    },
+    {
+        "code": "R255",
+        "name": "黃史改"
+    },
+    {
+        "code": "R264",
+        "name": "陳安柏"
+    },
+    {
+        "code": "R269",
+        "name": "吳琳達"
+    },
+    {
+        "code": "R276",
+        "name": "楊傑"
+    }
+  ],
+  [
+    {
+        "code": "R002",
+        "role": 3,
+        "occupationId": 0,
+        "name": "張理查",
+        "countryId": 0,
+        "countryName": "浪",
+        "countryColor": "#A1A1A1,#FFFFFF"
+    },
+    {
+        "code": "R001",
+        "role": 3,
+        "occupationId": 0,
+        "name": "侯米奇",
+        "countryId": 0,
+        "countryName": "浪",
+        "countryColor": "#A1A1A1,#FFFFFF"
+    },
+    {
+        "code": "R006",
+        "role": 2,
+        "occupationId": 0,
+        "name": "全彼得",
+        "countryId": 5,
+        "countryName": "鬆露",
+        "countryColor": "#3949AB,#ffffff"
+    },
+    {
+        "code": "R008",
+        "role": 1,
+        "occupationId": 0,
+        "name": "黃龜龜",
+        "countryId": 5,
+        "countryName": "鬆露",
+        "countryColor": "#3949AB,#ffffff"
+    },
+    {
+        "code": "R007",
+        "role": 2,
+        "occupationId": 5,
+        "name": "林波奇",
+        "countryId": 1,
+        "countryName": "覓",
+        "countryColor": "#ffffff,#111111"
+    },
+    {
+        "code": "R009",
+        "role": 2,
+        "occupationId": 7,
+        "name": "楊哈子",
+        "countryId": 1,
+        "countryName": "覓",
+        "countryColor": "#ffffff,#111111"
+    },
+    {
+        "code": "R011",
+        "role": 2,
+        "occupationId": 3,
+        "name": "何噠噠",
+        "countryId": 1,
+        "countryName": "覓",
+        "countryColor": "#ffffff,#111111"
+    },
+    {
+        "code": "R013",
+        "role": 2,
+        "occupationId": 0,
+        "name": "焦婕西",
+        "countryId": 3,
+        "countryName": "空幹",
+        "countryColor": "#111111,#ffffff"
+    },
+    {
+        "code": "R015",
+        "role": 2,
+        "occupationId": 2,
+        "name": "甘肯",
+        "countryId": 1,
+        "countryName": "覓",
+        "countryColor": "#ffffff,#111111"
+    },
+    {
+        "code": "R017",
+        "role": 2,
+        "occupationId": 0,
+        "name": "黃杰夫",
+        "countryId": 3,
+        "countryName": "空幹",
+        "countryColor": "#111111,#ffffff"
+    },
+    {
+        "code": "R018",
+        "role": 2,
+        "occupationId": 2,
+        "name": "邱鬼客",
+        "countryId": 7,
+        "countryName": "琥",
+        "countryColor": "#F57C00,#ffffff"
+    },
+    {
+        "code": "R021",
+        "role": 2,
+        "occupationId": 9,
+        "name": "楊祿",
+        "countryId": 7,
+        "countryName": "琥",
+        "countryColor": "#F57C00,#ffffff"
+    },
+    {
+        "code": "R024",
+        "role": 2,
+        "occupationId": 1,
+        "name": "許瑞塔",
+        "countryId": 7,
+        "countryName": "琥",
+        "countryColor": "#F57C00,#ffffff"
+    },
+    {
+        "code": "R023",
+        "role": 2,
+        "occupationId": 0,
+        "name": "楊水晶",
+        "countryId": 3,
+        "countryName": "空幹",
+        "countryColor": "#111111,#ffffff"
+    },
+    {
+        "code": "R022",
+        "role": 2,
+        "occupationId": 6,
+        "name": "林強壯",
+        "countryId": 1,
+        "countryName": "覓",
+        "countryColor": "#ffffff,#111111"
+    },
+    {
+        "code": "R027",
+        "role": 2,
+        "occupationId": 0,
+        "name": "林欣欣",
+        "countryId": 3,
+        "countryName": "空幹",
+        "countryColor": "#111111,#ffffff"
+    },
+    {
+        "code": "R026",
+        "role": 1,
+        "occupationId": 0,
+        "name": "趙強森",
+        "countryId": 7,
+        "countryName": "琥",
+        "countryColor": "#F57C00,#ffffff"
+    },
+    {
+        "code": "R031",
+        "role": 2,
+        "occupationId": 0,
+        "name": "林桑",
+        "countryId": 5,
+        "countryName": "鬆露",
+        "countryColor": "#3949AB,#ffffff"
+    },
+    {
+        "code": "R035",
+        "role": 2,
+        "occupationId": 6,
+        "name": "陳羅壹",
+        "countryId": 7,
+        "countryName": "琥",
+        "countryColor": "#F57C00,#ffffff"
+    },
+    {
+        "code": "R033",
+        "role": 3,
+        "occupationId": 0,
+        "name": "朱凱文",
+        "countryId": 0,
+        "countryName": "浪",
+        "countryColor": "#A1A1A1,#FFFFFF"
+    },
+    {
+        "code": "R037",
+        "role": 2,
+        "occupationId": 0,
+        "name": "黃義鯊",
+        "countryId": 5,
+        "countryName": "鬆露",
+        "countryColor": "#3949AB,#ffffff"
+    },
+    {
+        "code": "R040",
+        "role": 2,
+        "occupationId": 0,
+        "name": "陳杰德",
+        "countryId": 3,
+        "countryName": "空幹",
+        "countryColor": "#111111,#ffffff"
+    },
+    {
+        "code": "R045",
+        "role": 2,
+        "occupationId": 5,
+        "name": "張華特",
+        "countryId": 7,
+        "countryName": "琥",
+        "countryColor": "#F57C00,#ffffff"
+    },
+    {
+        "code": "R044",
+        "role": 2,
+        "occupationId": 2,
+        "name": "余鱗",
+        "countryId": 3,
+        "countryName": "空幹",
+        "countryColor": "#111111,#ffffff"
+    },
+    {
+        "code": "R043",
+        "role": 2,
+        "occupationId": 7,
+        "name": "鄒墾丁",
+        "countryId": 7,
+        "countryName": "琥",
+        "countryColor": "#F57C00,#ffffff"
+    },
+    {
+        "code": "R046",
+        "role": 2,
+        "occupationId": 0,
+        "name": "林特",
+        "countryId": 2,
+        "countryName": "風",
+        "countryColor": "#AB47BC,#ffffff"
+    },
+    {
+        "code": "R047",
+        "role": 3,
+        "occupationId": 0,
+        "name": "鍾沙亞",
+        "countryId": 0,
+        "countryName": "浪",
+        "countryColor": "#A1A1A1,#FFFFFF"
+    },
+    {
+        "code": "R049",
+        "role": 2,
+        "occupationId": 9,
+        "name": "宋萊恩",
+        "countryId": 3,
+        "countryName": "空幹",
+        "countryColor": "#111111,#ffffff"
+    },
+    {
+        "code": "R052",
+        "role": 2,
+        "occupationId": 0,
+        "name": "林單單",
+        "countryId": 1,
+        "countryName": "覓",
+        "countryColor": "#ffffff,#111111"
+    },
+    {
+        "code": "R050",
+        "role": 3,
+        "occupationId": 0,
+        "name": "吳玫",
+        "countryId": 0,
+        "countryName": "浪",
+        "countryColor": "#A1A1A1,#FFFFFF"
+    },
+    {
+        "code": "R056",
+        "role": 2,
+        "occupationId": 0,
+        "name": "高茯苓",
+        "countryId": 3,
+        "countryName": "空幹",
+        "countryColor": "#111111,#ffffff"
+    },
+    {
+        "code": "R055",
+        "role": 2,
+        "occupationId": 3,
+        "name": "譚雅各",
+        "countryId": 3,
+        "countryName": "空幹",
+        "countryColor": "#111111,#ffffff"
+    },
+    {
+        "code": "R053",
+        "role": 2,
+        "occupationId": 7,
+        "name": "徐司",
+        "countryId": 3,
+        "countryName": "空幹",
+        "countryColor": "#111111,#ffffff"
+    },
+    {
+        "code": "R059",
+        "role": 2,
+        "occupationId": 5,
+        "name": "陳爩繘戫",
+        "countryId": 5,
+        "countryName": "鬆露",
+        "countryColor": "#3949AB,#ffffff"
+    },
+    {
+        "code": "R064",
+        "role": 3,
+        "occupationId": 0,
+        "name": "程寶寶",
+        "countryId": 0,
+        "countryName": "浪",
+        "countryColor": "#A1A1A1,#FFFFFF"
+    },
+    {
+        "code": "R067",
+        "role": 2,
+        "occupationId": 0,
+        "name": "王福康",
+        "countryId": 5,
+        "countryName": "鬆露",
+        "countryColor": "#3949AB,#ffffff"
+    },
+    {
+        "code": "R069",
+        "role": 1,
+        "occupationId": 0,
+        "name": "許維克",
+        "countryId": 3,
+        "countryName": "空幹",
+        "countryColor": "#111111,#ffffff"
+    },
+    {
+        "code": "R075",
+        "role": 2,
+        "occupationId": 0,
+        "name": "洪零",
+        "countryId": 1,
+        "countryName": "覓",
+        "countryColor": "#ffffff,#111111"
+    },
+    {
+        "code": "R082",
+        "role": 2,
+        "occupationId": 8,
+        "name": "林森",
+        "countryId": 7,
+        "countryName": "琥",
+        "countryColor": "#F57C00,#ffffff"
+    },
+    {
+        "code": "R094",
+        "role": 2,
+        "occupationId": 0,
+        "name": "王筆的",
+        "countryId": 5,
+        "countryName": "鬆露",
+        "countryColor": "#3949AB,#ffffff"
+    },
+    {
+        "code": "R100",
+        "role": 2,
+        "occupationId": 0,
+        "name": "葉威力",
+        "countryId": 3,
+        "countryName": "空幹",
+        "countryColor": "#111111,#ffffff"
+    },
+    {
+        "code": "R109",
+        "role": 2,
+        "occupationId": 9,
+        "name": "李莫爾",
+        "countryId": 2,
+        "countryName": "風",
+        "countryColor": "#AB47BC,#ffffff"
+    },
+    {
+        "code": "R113",
+        "role": 2,
+        "occupationId": 7,
+        "name": "張灰",
+        "countryId": 5,
+        "countryName": "鬆露",
+        "countryColor": "#3949AB,#ffffff"
+    },
+    {
+        "code": "R123",
+        "role": 2,
+        "occupationId": 3,
+        "name": "賴克西亞",
+        "countryId": 5,
+        "countryName": "鬆露",
+        "countryColor": "#3949AB,#ffffff"
+    },
+    {
+        "code": "R133",
+        "role": 2,
+        "occupationId": 1,
+        "name": "李提姆",
+        "countryId": 1,
+        "countryName": "覓",
+        "countryColor": "#ffffff,#111111"
+    },
+    {
+        "code": "R147",
+        "role": 2,
+        "occupationId": 4,
+        "name": "蔡迪桑",
+        "countryId": 5,
+        "countryName": "鬆露",
+        "countryColor": "#3949AB,#ffffff"
+    },
+    {
+        "code": "R164",
+        "role": 2,
+        "occupationId": 2,
+        "name": "謝多南",
+        "countryId": 5,
+        "countryName": "鬆露",
+        "countryColor": "#3949AB,#ffffff"
+    },
+    {
+        "code": "R179",
+        "role": 1,
+        "occupationId": 0,
+        "name": "李維克",
+        "countryId": 2,
+        "countryName": "風",
+        "countryColor": "#AB47BC,#ffffff"
+    },
+    {
+        "code": "R178",
+        "role": 2,
+        "occupationId": 3,
+        "name": "陳苓苓",
+        "countryId": 7,
+        "countryName": "琥",
+        "countryColor": "#F57C00,#ffffff"
+    },
+    {
+        "code": "R176",
+        "role": 2,
+        "occupationId": 1,
+        "name": "于凱琳",
+        "countryId": 3,
+        "countryName": "空幹",
+        "countryColor": "#111111,#ffffff"
+    },
+    {
+        "code": "R185",
+        "role": 2,
+        "occupationId": 1,
+        "name": "許亨利",
+        "countryId": 2,
+        "countryName": "風",
+        "countryColor": "#AB47BC,#ffffff"
+    },
+    {
+        "code": "R187",
+        "role": 2,
+        "occupationId": 0,
+        "name": "王大衛",
+        "countryId": 5,
+        "countryName": "鬆露",
+        "countryColor": "#3949AB,#ffffff"
+    },
+    {
+        "code": "R192",
+        "role": 2,
+        "occupationId": 9,
+        "name": "黃賓娜",
+        "countryId": 5,
+        "countryName": "鬆露",
+        "countryColor": "#3949AB,#ffffff"
+    },
+    {
+        "code": "R198",
+        "role": 2,
+        "occupationId": 6,
+        "name": "李戎龍",
+        "countryId": 5,
+        "countryName": "鬆露",
+        "countryColor": "#3949AB,#ffffff"
+    },
+    {
+        "code": "R196",
+        "role": 2,
+        "occupationId": 0,
+        "name": "柯安格斯",
+        "countryId": 3,
+        "countryName": "空幹",
+        "countryColor": "#111111,#ffffff"
+    },
+    {
+        "code": "R205",
+        "role": 2,
+        "occupationId": 0,
+        "name": "方傑克",
+        "countryId": 1,
+        "countryName": "覓",
+        "countryColor": "#ffffff,#111111"
+    },
+    {
+        "code": "R209",
+        "role": 2,
+        "occupationId": 0,
+        "name": "郭棣",
+        "countryId": 2,
+        "countryName": "風",
+        "countryColor": "#AB47BC,#ffffff"
+    },
+    {
+        "code": "R231",
+        "role": 2,
+        "occupationId": 8,
+        "name": "李雪倫",
+        "countryId": 5,
+        "countryName": "鬆露",
+        "countryColor": "#3949AB,#ffffff"
+    },
+    {
+        "code": "R230",
+        "role": 2,
+        "occupationId": 0,
+        "name": "劉厄普頓",
+        "countryId": 1,
+        "countryName": "覓",
+        "countryColor": "#ffffff,#111111"
+    },
+    {
+        "code": "R235",
+        "role": 2,
+        "occupationId": 3,
+        "name": "曾吉米",
+        "countryId": 2,
+        "countryName": "風",
+        "countryColor": "#AB47BC,#ffffff"
+    },
+    {
+        "code": "R246",
+        "role": 2,
+        "occupationId": 0,
+        "name": "黃霍華德",
+        "countryId": 1,
+        "countryName": "覓",
+        "countryColor": "#ffffff,#111111"
+    },
+    {
+        "code": "R251",
+        "role": 2,
+        "occupationId": 2,
+        "name": "廖姆濕",
+        "countryId": 2,
+        "countryName": "風",
+        "countryColor": "#AB47BC,#ffffff"
+    },
+    {
+        "code": "R255",
+        "role": 2,
+        "occupationId": 4,
+        "name": "黃史改",
+        "countryId": 1,
+        "countryName": "覓",
+        "countryColor": "#ffffff,#111111"
+    },
+    {
+        "code": "R264",
+        "role": 2,
+        "occupationId": 0,
+        "name": "陳安柏",
+        "countryId": 1,
+        "countryName": "覓",
+        "countryColor": "#ffffff,#111111"
+    },
+    {
+        "code": "R269",
+        "role": 2,
+        "occupationId": 8,
+        "name": "吳琳達",
+        "countryId": 1,
+        "countryName": "覓",
+        "countryColor": "#ffffff,#111111"
+    },
+    {
+        "code": "R276",
+        "role": 2,
+        "occupationId": 0,
+        "name": "楊傑",
+        "countryId": 7,
+        "countryName": "琥",
+        "countryColor": "#F57C00,#ffffff"
+    },
+    {
+        "code": "R279",
+        "role": 2,
+        "occupationId": 7,
+        "name": "趙斯特",
+        "countryId": 2,
+        "countryName": "風",
+        "countryColor": "#AB47BC,#ffffff"
+    },
+    {
+        "code": "R281",
+        "role": 2,
+        "occupationId": 0,
+        "name": "古曼蒂",
+        "countryId": 3,
+        "countryName": "空幹",
+        "countryColor": "#111111,#ffffff"
+    },
+    {
+        "code": "R285",
+        "role": 2,
+        "occupationId": 1,
+        "name": "謝謝泥",
+        "countryId": 5,
+        "countryName": "鬆露",
+        "countryColor": "#3949AB,#ffffff"
+    },
+    {
+        "code": "R289",
+        "role": 2,
+        "occupationId": 0,
+        "name": "廖尚恩",
+        "countryId": 3,
+        "countryName": "空幹",
+        "countryColor": "#111111,#ffffff"
+    },
+    {
+        "code": "R293",
+        "role": 2,
+        "occupationId": 0,
+        "name": "許山姆",
+        "countryId": 3,
+        "countryName": "空幹",
+        "countryColor": "#111111,#ffffff"
+    },
+    {
+        "code": "R297",
+        "role": 1,
+        "occupationId": 0,
+        "name": "施琲琲",
+        "countryId": 1,
+        "countryName": "覓",
+        "countryColor": "#ffffff,#111111"
+    },
+    {
+        "code": "R300",
+        "role": 2,
+        "occupationId": 0,
+        "name": "葉尚恩",
+        "countryId": 3,
+        "countryName": "空幹",
+        "countryColor": "#111111,#ffffff"
+    },
+    {
+        "code": "R305",
+        "role": 2,
+        "occupationId": 0,
+        "name": "張艾比",
+        "countryId": 2,
+        "countryName": "風",
+        "countryColor": "#AB47BC,#ffffff"
+    },
+    {
+        "code": "R307",
+        "role": 1,
+        "occupationId": 0,
+        "name": "謝小白",
+        "countryId": null,
+        "countryName": "浪",
+        "countryColor": "#A1A1A1,#FFFFFF"
+    },
+    {
+        "code": "R313",
+        "role": 2,
+        "occupationId": 9,
+        "name": "葉蘿拉",
+        "countryId": 1,
+        "countryName": "覓",
+        "countryColor": "#ffffff,#111111"
+    },
+    {
+        "code": "R312",
+        "role": 2,
+        "occupationId": 0,
+        "name": "楊薇薇",
+        "countryId": 7,
+        "countryName": "琥",
+        "countryColor": "#F57C00,#ffffff"
+    },
+    {
+        "code": "R323",
+        "role": 3,
+        "occupationId": 0,
+        "name": "高湯米",
+        "countryId": 0,
+        "countryName": "浪",
+        "countryColor": "#A1A1A1,#FFFFFF"
+    },
+    {
+        "code": "R322",
+        "role": 2,
+        "occupationId": 0,
+        "name": "楊斯坦",
+        "countryId": 1,
+        "countryName": "覓",
+        "countryColor": "#ffffff,#111111"
+    },
+    {
+        "code": "R330",
+        "role": 3,
+        "occupationId": 0,
+        "name": "張傑瑞",
+        "countryId": 0,
+        "countryName": "浪",
+        "countryColor": "#A1A1A1,#FFFFFF"
+    },
+    {
+        "code": "R332",
+        "role": 2,
+        "occupationId": 0,
+        "name": "魏漢克",
+        "countryId": 3,
+        "countryName": "空幹",
+        "countryColor": "#111111,#ffffff"
+    },
+    {
+        "code": "R339",
+        "role": 2,
+        "occupationId": 0,
+        "name": "盧瑞秋",
+        "countryId": 5,
+        "countryName": "鬆露",
+        "countryColor": "#3949AB,#ffffff"
+    },
+    {
+        "code": "R343",
+        "role": 3,
+        "occupationId": 0,
+        "name": "莊雪",
+        "countryId": 0,
+        "countryName": "浪",
+        "countryColor": "#A1A1A1,#FFFFFF"
+    },
+    {
+        "code": "R348",
+        "role": 2,
+        "occupationId": 4,
+        "name": "駱傑克",
+        "countryId": 3,
+        "countryName": "空幹",
+        "countryColor": "#111111,#ffffff"
+    },
+    {
+        "code": "R350",
+        "role": 2,
+        "occupationId": 4,
+        "name": "曾文森",
+        "countryId": 7,
+        "countryName": "琥",
+        "countryColor": "#F57C00,#ffffff"
+    },
+    {
+        "code": "R349",
+        "role": 2,
+        "occupationId": 0,
+        "name": "楊艾倫",
+        "countryId": 3,
+        "countryName": "空幹",
+        "countryColor": "#111111,#ffffff"
+    },
+    {
+        "code": "R356",
+        "role": 2,
+        "occupationId": 0,
+        "name": "吳阿爾維斯",
+        "countryId": 3,
+        "countryName": "空幹",
+        "countryColor": "#111111,#ffffff"
+    },
+    {
+        "code": "R358",
+        "role": 3,
+        "occupationId": 0,
+        "name": "楊凱文",
+        "countryId": 0,
+        "countryName": "浪",
+        "countryColor": "#A1A1A1,#FFFFFF"
+    },
+    {
+        "code": "R359",
+        "role": 2,
+        "occupationId": 0,
+        "name": "林利歐",
+        "countryId": 7,
+        "countryName": "琥",
+        "countryColor": "#F57C00,#ffffff"
+    },
+    {
+        "code": "R363",
+        "role": 3,
+        "occupationId": 0,
+        "name": "黃塞蒙",
+        "countryId": 0,
+        "countryName": "浪",
+        "countryColor": "#A1A1A1,#FFFFFF"
+    },
+    {
+        "code": "R366",
+        "role": 2,
+        "occupationId": 0,
+        "name": "周尚恩",
+        "countryId": 1,
+        "countryName": "覓",
+        "countryColor": "#ffffff,#111111"
+    },
+    {
+        "code": "R368",
+        "role": 2,
+        "occupationId": 0,
+        "name": "葉魏詩",
+        "countryId": 1,
+        "countryName": "覓",
+        "countryColor": "#ffffff,#111111"
+    },
+    {
+        "code": "R369",
+        "role": 2,
+        "occupationId": 0,
+        "name": "陳大衛",
+        "countryId": 1,
+        "countryName": "覓",
+        "countryColor": "#ffffff,#111111"
+    },
+    {
+        "code": "R370",
+        "role": 2,
+        "occupationId": 6,
+        "name": "林愛文",
+        "countryId": 3,
+        "countryName": "空幹",
+        "countryColor": "#111111,#ffffff"
+    },
+    {
+        "code": "R111",
+        "role": 3,
+        "occupationId": 0,
+        "name": "袁小白",
+        "countryId": 0,
+        "countryName": "浪",
+        "countryColor": "#A1A1A1,#FFFFFF"
+    },
+    {
+        "code": "R371",
+        "role": 2,
+        "occupationId": 0,
+        "name": "柯單利",
+        "countryId": 7,
+        "countryName": "琥",
+        "countryColor": "#F57C00,#ffffff"
+    },
+    {
+        "code": "R372",
+        "role": 3,
+        "occupationId": 0,
+        "name": "郭若",
+        "countryId": 0,
+        "countryName": "浪",
+        "countryColor": "#A1A1A1,#FFFFFF"
+    }
+  ]
+]

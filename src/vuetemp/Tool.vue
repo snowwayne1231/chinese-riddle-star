@@ -1,0 +1,459 @@
+<template>
+  <div class="tool-page">
+    <div>
+      <div class="choice-zone">
+        <div class="vs-block" v-for="(item, idx) in vsList">
+          <div
+            class="vs-user-area"
+            :class="[item.name == '武將' ? 'no-one' : 'has-one']"
+          >
+            <img
+              class="img"
+              :src="getUserImgUrl(item)"
+            />
+            <div class="user-name">
+              {{ item.name }}
+            </div>
+          </div>
+          <div>
+            <div
+              class="country-name"
+              :style="{
+                color: item.countryColor[0],
+                'text-shadow': '2px 2px 2px ' + item.countryColor[1]
+              }"
+            >
+              {{ item.countryName }}
+            </div>
+            <div
+              class="country-name-bg"
+              :style="{
+                background: item.countryColor[0]
+              }"
+            ></div>
+          </div>
+        </div>
+      </div>
+      <div class="list">
+        <div
+          v-for="(item, index) in list"
+          :key="index"
+          class="img-area"
+          :class="{
+            active: item.disable,
+            selected: animationSelectedCode == item.code
+          }"
+        >
+          <div class="show-block-img">
+            <img
+              class="un-img"
+              :aspect-ratio="9 / 12"
+              style="top: -30px"
+              :src="getUserImgUrl(item)"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'Tool',
+
+  data() {
+    return {
+      roleMapObj: {
+        1: '_1',
+        2: '',
+        3: '_0'
+      },
+      occupationIdMapObj: {
+        1: '_2',
+        2: '_2',
+        3: '_3',
+        4: '_3',
+        5: '_3',
+        6: '_3',
+        7: '_3',
+        8: '_3',
+        9: '_4'
+      },
+      defaultVsObj: {
+        code: 'R000',
+        role: 2,
+        name: '武將',
+        occupationId: 0,
+        countryName: '國家',
+        countryColor: ['#A1A1A1', '#FFF']
+      },
+      // list:人選清單
+      list: [],
+      // vsList: 對抗清單
+      vsList: [],
+      animationSelectedCode: '',
+      results: []
+    }
+  },
+
+  computed: {
+    finished() {
+      return this.results.length * 4 === this.list.length
+    },
+    enableList() {
+      return this.list.filter((e) => !e.disable)
+    },
+    listObj() {
+      return this.list.reduce(function (target, key, index) {
+        target[key.code] = key
+        return target
+      }, {})
+    }
+  },
+
+  mounted() {
+    fetch('/joinlist.json')
+      .then((res) => res.json())
+      .then((data) => {
+        const userMap = {}
+        data[1].map((user) => {
+          user.countryColor = user.countryColor.split(',')
+          user.disable = false
+          user.userImageDone = true
+          userMap[user.code] = user
+        })
+        this.list = data[0]
+          .map((item) => {
+            return userMap[item.code]
+          })
+          .filter((e) => !!e)
+        console.log('people list: ', this.list)
+
+        this.resetVsList()
+        this.bindKeyboardEvent()
+        this.load()
+      })
+  },
+
+  methods: {
+    resetVsList() {
+      this.vsList = new Array(4).fill(this.defaultVsObj)
+    },
+    getUserImgUrl(user) {
+      const useUserKey = user.occupationId > 0 ? 'occupationId' : 'role'
+      const mapObj = this[useUserKey + 'MapObj']
+      return 'http://172.16.20.73:20221/welfare22/images/user/' + user.code + mapObj[user[useUserKey]] + '.png'
+    },
+    onKeyboard(evt) {
+      console.log('enter key: ', evt.key)
+      switch (evt.key) {
+        case 'Enter':
+          this.goNext()
+          break
+        case 'd':
+          window.confirm('移除當前結果嗎?') && this.delete()
+          break
+        case 'r':
+          if (window.confirm('重選玩家嗎?')) {
+            this.reRandomAgain()
+          }
+          break
+        // case 'Control':
+        //   this.download()
+        //   break
+        default:
+      }
+    },
+    bindKeyboardEvent() {
+      if (window.binded) {
+        return
+      }
+      window.binded = true
+      document.addEventListener('keydown', this.onKeyboard)
+    },
+    goNext() {
+      if (this.tmpLock) {
+        return
+      }
+      this.tmpLock = true
+      const vs = this.vsList
+      if (vs.filter((e) => e.code == 'R000').length == 0) {
+        // 確認滿
+        if (window.confirm('重新選取嗎?')) {
+          this.results.push(vs.map((e) => e.code))
+          this.save()
+          this.resetVsList()
+        }
+        this.tmpLock = false
+      } else {
+        // 需要隨機
+        const ridx = vs.findIndex(e => e.code == 'R000')
+        this.randCode(ridx).then(() => {
+          this.tmpLock = false
+        })
+      }
+    },
+    randCode(idx) {
+      return this.enableList.length == 0
+        ? new Promise(() => true)
+        : this.animationResult()
+            .then((code) => {
+              console.log('animationResult: ', code)
+              const nextItem = this.list.find((e) => e.code == code)
+              if (idx >= 0 && this.vsList[idx]) {
+                const nextVsList = this.vsList.slice();
+                nextItem.disable = true;
+                nextVsList[idx] = nextItem;
+                this.vsList = nextVsList;
+                this.list = this.list.slice()
+              }              
+              return code
+            })
+            .catch((err) => {
+              console.log('err: ', err)
+            })
+    },
+    reRandomAgain(idx = -1) {
+      let handleIndex = idx;
+      if (idx == -1) {
+        let findedIdx = this.vsList.findIndex(e => e.code == 'R000');
+        handleIndex = findedIdx == -1 ? 3 : (findedIdx-1)
+      }
+      const oldCode = this.vsList[handleIndex].code
+      return this.randCode(handleIndex).then(() => {
+        const _item = this.list.find((e) => e.code == oldCode)
+        _item.disable = false
+        this.list = this.list.slice()
+      })
+    },
+    animationResult() {
+      return new Promise(this.aniLoop)
+    },
+    aniLoop(resolve, reject) {
+      const _list = this.enableList
+      let times = 32
+      let randCode = ''
+      const loopFn = () => {
+        let go = true
+        if (times <= 24) {
+          go = times % 2 == 0
+        } else if (times <= 10) {
+          go = times % 5 == 0
+        }
+        if (go) {
+          randCode = _list[Math.floor(Math.random() * _list.length)].code
+          this.animationSelectedCode = randCode
+        }
+        if (times <= 0) {
+          window.clearInterval(_timer)
+          resolve(randCode)
+        }
+        times -= 1
+      }
+      const _timer = window.setInterval(loopFn, 100)
+    },
+    save() {
+      const vsResults = this.results
+      localStorage.setItem('__event12__result__', JSON.stringify(vsResults))
+    },
+    load() {
+      const resultstr = localStorage.getItem('__event12__result__')
+      if (resultstr) {
+        const _ary = JSON.parse(resultstr)
+        if (typeof _ary == 'object' && Array.isArray(_ary)) {
+          this.results = _ary
+          const codes = this.list.map((e) => e.code)
+          const nextList = this.list.slice()
+          _ary.map((vs) => {
+            vs.map((_) => {
+              const cidx = codes.indexOf(_)
+              if (cidx >= 0) nextList[cidx].disable = true
+            })
+          })
+          this.list = nextList
+        }
+      }
+    },
+    delete() {
+      this.results = []
+      this.list.map((e) => {
+        e.disable = false
+      })
+      this.list = this.list.slice()
+      this.resetVsList()
+      localStorage.removeItem('__event12__result__')
+    },
+    download() {
+      let csvContent = 'data:text/csv;charset=utf-8,'
+      const listMap = {}
+      this.list.map((e) => {
+        listMap[e.code] = e
+      })
+      this.results.forEach((ary) => {
+        let codeLeft = ary[0]
+        let codeRight = ary[1]
+        let leftName = listMap[codeLeft].name
+        let rightName = listMap[codeRight].name
+        let row = `${codeLeft} [${leftName}] ,  VS  ,  ${codeRight} [${rightName}]`
+        csvContent += row + '\r\n'
+      })
+      const universalBOM = '\uFEFF'
+      const encodedUri = encodeURI(csvContent)
+      const link = document.createElement('a')
+      link.setAttribute('href', encodedUri)
+      link.setAttribute('download', 'event9_match.csv')
+      document.body.appendChild(link)
+      link.click()
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+.tool-page {
+  width: 100vw;
+  height: 100vh;
+  background: url('/public/menu_bg.jpg') center center no-repeat;
+  background-size: cover;
+
+  .choice-zone {
+    border-bottom: 2px solid #958640;
+    text-align: center;
+  }
+  .list {
+    width: 100%;
+    padding: 1px;
+    text-align: center;
+  }
+  .img-area {
+    position: relative;
+    border: 2px outset #777777;
+    border-radius: 3px;
+    box-sizing: border-box;
+    display: inline-block;
+    margin: 2px;
+    height: 106px;
+
+    &.active {
+      .show-block-img {
+        filter: opacity(0.3);
+        border-color: #d8b585;
+        border-width: 4px;
+      }
+    }
+    &.selected {
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: -5px;
+        top: -5px;
+        border: 5px solid #f82e27;
+        box-shadow: 0 0 3px #f82e27;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .show-block-img {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      text-align: center;
+      background: #fff;
+      box-sizing: border-box;
+      border: 1px outset #777777;
+    }
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+    
+  }
+
+  .vs-block {
+    position: relative;
+    width: 25%;
+    height: 300px;
+    background: #00000086;
+    overflow: hidden;
+    font-family: '華康行楷體W5';
+    border-radius: 15px;
+    box-sizing: border-box;
+    text-align: center;
+    display: inline-block;
+    border: 3px outset #ffeac4;
+
+    .vs-user-area {
+      position: relative;
+
+      &.no-one {
+        .img {
+          filter: drop-shadow(5px 0 #ccc) !important;
+          transform: translateX(0px) !important;
+        }
+      }
+      &.has-one {
+        .img {
+          animation: 1s zoominimg ease;
+        }
+      }
+      .user-name {
+        white-space: nowrap;
+        position: absolute;
+        z-index: 3;
+        bottom: 28%;
+        color: #fff;
+        right: 80%;
+        font-size: 52px;
+        writing-mode: vertical-lr;
+        text-shadow: 5px 5px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
+          -1px 1px 0 #000, 1px 1px 0 #000;
+      }
+    }
+    .country-name {
+      position: absolute;
+      bottom: 0;
+      z-index: 0;
+      font-size: 48px;
+      width: 30%;
+      right: 0;
+      text-align: right;
+      padding-right: 2%;
+      transition: color 1s ease;
+    }
+    .country-name-bg {
+      position: absolute;
+      top: 0;
+      z-index: 1;
+      height: 100%;
+      width: 100%;
+      clip-path: polygon(100% 45%, 0% 100%, 100% 100%);
+      right: 0;
+      text-align: right;
+      opacity: 0.5;
+      transition: background 1s ease;
+    }
+    .img {
+      position: relative;
+      z-index: 2;
+      max-height: 320px;
+      
+    }
+  }
+}
+
+@keyframes zoominimg {
+  0% {
+    max-height: 600px;
+  }
+
+  90% {
+    max-height: 300px;
+  }
+
+  100% {
+    max-height: 320px;
+  }
+}
+</style>
