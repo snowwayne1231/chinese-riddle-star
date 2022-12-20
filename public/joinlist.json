@@ -454,7 +454,7 @@
     {
         "code": "R040",
         "role": 2,
-        "occupationId": 0,
+        "occupationId": 9,
         "name": "陳杰德",
         "countryId": 3,
         "countryName": "空幹",
@@ -508,7 +508,7 @@
     {
         "code": "R049",
         "role": 2,
-        "occupationId": 9,
+        "occupationId": 0,
         "name": "宋萊恩",
         "countryId": 3,
         "countryName": "空幹",
@@ -751,7 +751,7 @@
     {
         "code": "R196",
         "role": 2,
-        "occupationId": 0,
+        "occupationId": 5,
         "name": "柯安格斯",
         "countryId": 3,
         "countryName": "空幹",
@@ -823,7 +823,7 @@
     {
         "code": "R255",
         "role": 2,
-        "occupationId": 4,
+        "occupationId": 9,
         "name": "黃史改",
         "countryId": 1,
         "countryName": "覓",
@@ -886,7 +886,7 @@
     {
         "code": "R289",
         "role": 2,
-        "occupationId": 0,
+        "occupationId": 8,
         "name": "廖尚恩",
         "countryId": 3,
         "countryName": "空幹",
@@ -940,7 +940,7 @@
     {
         "code": "R313",
         "role": 2,
-        "occupationId": 9,
+        "occupationId": 0,
         "name": "葉蘿拉",
         "countryId": 1,
         "countryName": "覓",

@@ -31,6 +31,9 @@
                 background: item.countryColor[0]
               }"
             ></div>
+            <div class="gift-number-block" :class="{show: item.name != '武將'}">
+              <span class="gift-number">{{ userGiftMap[item.code] }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -93,6 +96,8 @@ export default {
       // vsList: 對抗清單
       vsList: [],
       animationSelectedCode: '',
+      gifts: [],
+      userGiftMap: {},
       results: []
     }
   },
@@ -129,7 +134,7 @@ export default {
           })
           .filter((e) => !!e)
         console.log('people list: ', this.list)
-
+        this.resetGifts()
         this.resetVsList()
         this.bindKeyboardEvent()
         this.load()
@@ -137,6 +142,10 @@ export default {
   },
 
   methods: {
+    resetGifts() {
+      this.userGiftMap = {}
+      this.gifts = new Array(this.list.length + 7).fill(0).map((val, idx) => idx +1);
+    },
     resetVsList() {
       this.vsList = new Array(4).fill(this.defaultVsObj)
     },
@@ -202,6 +211,10 @@ export default {
             .then((code) => {
               console.log('animationResult: ', code)
               const nextItem = this.list.find((e) => e.code == code)
+              const randGiftIdx = Math.floor(Math.random() * this.gifts.length)
+              const giftNum = this.gifts.splice(randGiftIdx, 1)[0];
+              this.userGiftMap[code] = giftNum;
+
               if (idx >= 0 && this.vsList[idx]) {
                 const nextVsList = this.vsList.slice();
                 nextItem.disable = true;
@@ -255,11 +268,14 @@ export default {
       const _timer = window.setInterval(loopFn, 100)
     },
     save() {
-      const vsResults = this.results
+      const vsResults = this.results;
+      const giftmap = this.userGiftMap;
       localStorage.setItem('__event12__result__', JSON.stringify(vsResults))
+      localStorage.setItem('__event12__giftmap__', JSON.stringify(giftmap))
     },
     load() {
       const resultstr = localStorage.getItem('__event12__result__')
+      const giftmapstr = localStorage.getItem('__event12__giftmap__')
       if (resultstr) {
         const _ary = JSON.parse(resultstr)
         if (typeof _ary == 'object' && Array.isArray(_ary)) {
@@ -275,6 +291,18 @@ export default {
           this.list = nextList
         }
       }
+      if (giftmapstr) {
+        const _map = JSON.parse(giftmapstr);
+        const nextGifts = this.gifts.slice();
+        Object.values(_map).map(gnum => {
+          let idx = nextGifts.indexOf(gnum);
+          if (idx >= 0) {
+            nextGifts.splice(idx, 1);
+          }
+        });
+        this.gifts = nextGifts;
+        this.userGiftMap = _map;;
+      }
     },
     delete() {
       this.results = []
@@ -283,7 +311,9 @@ export default {
       })
       this.list = this.list.slice()
       this.resetVsList()
+      this.resetGifts()
       localStorage.removeItem('__event12__result__')
+      localStorage.removeItem('__event12__giftmap__')
     },
     download() {
       let csvContent = 'data:text/csv;charset=utf-8,'
@@ -292,14 +322,11 @@ export default {
         listMap[e.code] = e
       })
       this.results.forEach((ary) => {
-        let codeLeft = ary[0]
-        let codeRight = ary[1]
-        let leftName = listMap[codeLeft].name
-        let rightName = listMap[codeRight].name
-        let row = `${codeLeft} [${leftName}] ,  VS  ,  ${codeRight} [${rightName}]`
+        let vsNames = ary.map(code => `${code} [${listMap[code].name}]`);
+        let row = vsNames.join(',');
         csvContent += row + '\r\n'
       })
-      const universalBOM = '\uFEFF'
+      // const universalBOM = '\uFEFF'
       const encodedUri = encodeURI(csvContent)
       const link = document.createElement('a')
       link.setAttribute('href', encodedUri)
@@ -441,6 +468,33 @@ export default {
       max-height: 320px;
       
     }
+    .gift-number-block {
+      position: absolute;
+      background: #f82e2700;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      border-radius: 50%;
+      top: 0px;
+      right: 0px;
+      transition: background 2s ease;
+
+      &.show {
+        background: #d71b14ff;
+        border: 2px #d8b585 outset;
+
+        .gift-number {
+          animation: 2s fontnumberrolling ease;
+        }
+      }
+
+      .gift-number {
+        display: inline-block;
+        font-size: 24px;
+        color :#fff;
+
+      }
+    }
   }
 }
 
@@ -455,6 +509,23 @@ export default {
 
   100% {
     max-height: 320px;
+  }
+}
+
+@keyframes fontnumberrolling {
+  0% {
+    transform: rotate(0deg);
+    font-size: 120px;
+  }
+
+  // 50% {
+  //   transform: rotate(360deg);
+  //   font-size: 52px;
+  // }
+
+  100% {
+    transform: rotate(720deg);
+    font-size: 24px;
   }
 }
 </style>

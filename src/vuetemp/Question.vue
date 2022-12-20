@@ -37,7 +37,7 @@
                 </div>
                 <div class="mt-60-px d-flex flex-wrap justify-center"
                     :class="[currQuestion.optionfz ? 'fz-' + currQuestion.optionfz + '-px' : 'fz-34-px']">
-                    <span v-for="(option, index) in currQuestion.options" :key="index"
+                    <span v-for="(option, index) in currQuestion.options.filter(e => e)" :key="index"
                         class="d-inlin-block px-16-px py-20-px d-flex option-area"
                         :class="openAnswer ? [index == currQuestion.answerIndex ? 'is-answer' : 'not-answer'] : null">
                         <span class="d-inlin-block align-self-start">{{ optionsLabel[index] }}、</span>
