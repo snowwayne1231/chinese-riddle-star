@@ -26,15 +26,22 @@ export default {
     },
     computed: {
         ...mapState(['open', 'checked', 'selectQuestionIndex', 'selectQuestionType']),
+        // currQuestionType() {
+        //     this.selectQuestionType == 'MUSIC' && !this.$refs.paused && this.$refs.initAudio.pause();
+        //     return this.selectQuestionType
+        // },
+        // currQuestionId() {
+        //     return this.selectQuestionIndex
+        // },
     },
     mounted() {
         this.$store.dispatch('wsEmitMessage', 'login');
         this.$refs.initAudio.volume = 0.1;
-        // this.$refs.initAudio.play().then(() => {
-        //     console.log('this: ', this);
-        // }).catch(err => {
-        //     console.log('err: ', err);
-        // })
+        this.$refs.initAudio.play().then(() => {
+            console.log('this: ', this);
+        }).catch(err => {
+            console.log('err: ', err);
+        })
     },
     methods: {
         onCloseCurtain(evt) {

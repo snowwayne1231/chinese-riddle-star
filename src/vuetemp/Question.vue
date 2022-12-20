@@ -11,7 +11,7 @@
                     {{ '{' + typeTitle[currQuestion.type] + '（' + currQuestion.qnum + '）}' }}
                 </div>
                 <div class="q-area text-left"
-                    :class="[currQuestion.textfz ? 'fz-' + currQuestion.textfz + '-px' : 'fz-40-px']">
+                    :class="[currQuestion.textfz ? 'fz-' + currQuestion.textfz + '-px' : 'fz-65-px']">
                     <div v-if="currQuestion.imageFileName" class="img-area">
                         <img class="v-image" :src="imageUrlStr + currQuestion.imageFileName" />
                     </div>
@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="mt-60-px d-flex flex-wrap justify-center"
-                    :class="[currQuestion.optionfz ? 'fz-' + currQuestion.optionfz + '-px' : 'fz-34-px']">
+                    :class="[currQuestion.optionfz ? 'fz-' + currQuestion.optionfz + '-px' : 'fz-70-px']">
                     <span v-for="(option, index) in currQuestion.options.filter(e => e)" :key="index"
                         class="d-inlin-block px-16-px py-20-px d-flex option-area"
                         :class="openAnswer ? [index == currQuestion.answerIndex ? 'is-answer' : 'not-answer'] : null">

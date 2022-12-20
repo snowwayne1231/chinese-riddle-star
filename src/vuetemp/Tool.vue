@@ -31,8 +31,10 @@
                 background: item.countryColor[0]
               }"
             ></div>
-            <div class="gift-number-block" :class="{show: item.name != '武將'}">
-              <span class="gift-number">{{ userGiftMap[item.code] }}</span>
+            <div class="gift-zone">
+              <div v-for="(gif, idx) in (userGiftMap[item.code] || [])" class="gift-number-block" :class="{show: item.name != '武將'}" :key="item.code+idx">
+                <span class="icon-gift">🎁</span><span class="gift-number">{{ gif }}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -98,6 +100,7 @@ export default {
       animationSelectedCode: '',
       gifts: [],
       userGiftMap: {},
+      specialCodes: ['R343', 'R064', 'R008', 'R026', 'R069', 'R179', 'R297'],
       results: []
     }
   },
@@ -204,17 +207,28 @@ export default {
         })
       }
     },
+    randGiftByCode(code) {
+      const randGiftIdx = Math.floor(Math.random() * this.gifts.length)
+      const giftNum = this.gifts.splice(randGiftIdx, 1);
+      if (this.userGiftMap[code]) {
+        this.userGiftMap[code] = this.userGiftMap[code].concat(giftNum);
+      } else {
+        this.userGiftMap[code] = giftNum;
+      }
+    },
     randCode(idx) {
+      console.log('randCode left gifts: ', this.gifts);
       return this.enableList.length == 0
         ? new Promise(() => true)
         : this.animationResult()
             .then((code) => {
               console.log('animationResult: ', code)
               const nextItem = this.list.find((e) => e.code == code)
-              const randGiftIdx = Math.floor(Math.random() * this.gifts.length)
-              const giftNum = this.gifts.splice(randGiftIdx, 1)[0];
-              this.userGiftMap[code] = giftNum;
-
+              this.randGiftByCode(code);
+              if (this.specialCodes.includes(code)) {
+                this.randGiftByCode(code);
+              }
+              
               if (idx >= 0 && this.vsList[idx]) {
                 const nextVsList = this.vsList.slice();
                 nextItem.disable = true;
@@ -238,6 +252,10 @@ export default {
       return this.randCode(handleIndex).then(() => {
         const _item = this.list.find((e) => e.code == oldCode)
         _item.disable = false
+        this.userGiftMap[oldCode].map(gift => {
+          this.gifts.push(gift);
+        });
+        delete this.userGiftMap[oldCode];
         this.list = this.list.slice()
       })
     },
@@ -294,11 +312,13 @@ export default {
       if (giftmapstr) {
         const _map = JSON.parse(giftmapstr);
         const nextGifts = this.gifts.slice();
-        Object.values(_map).map(gnum => {
-          let idx = nextGifts.indexOf(gnum);
-          if (idx >= 0) {
-            nextGifts.splice(idx, 1);
-          }
+        Object.values(_map).map(gnums => {
+          gnums.map(gnum => {
+            let idx = nextGifts.indexOf(gnum);
+            if (idx >= 0) {
+              nextGifts.splice(idx, 1);
+            }
+          });
         });
         this.gifts = nextGifts;
         this.userGiftMap = _map;;
@@ -468,30 +488,45 @@ export default {
       max-height: 320px;
       
     }
-    .gift-number-block {
+    .gift-zone {
       position: absolute;
-      background: #f82e2700;
-      width: 40px;
-      height: 40px;
-      line-height: 40px;
-      border-radius: 50%;
       top: 0px;
       right: 0px;
-      transition: background 2s ease;
+      z-index: 5;
+
+      .icon-gift {
+        position: absolute;
+        top: -18px;
+        left: -26px;
+        font-size: 30px;
+        text-shadow: 2px 1px 3px #222;
+        transition: left 1s ease;
+      }
+    }
+    .gift-number-block {
+      position: relative;
+      background: #f82e2700;
+      width: 76px;
+      height: 76px;
+      line-height: 76px;
+      border-radius: 50%;
+      animation: 2s bgtrans1 ease;
 
       &.show {
         background: #d71b14ff;
-        border: 2px #d8b585 outset;
+        border: 3px #d8b585 outset;
 
         .gift-number {
           animation: 2s fontnumberrolling ease;
         }
+
       }
 
       .gift-number {
         display: inline-block;
-        font-size: 24px;
+        font-size: 60px;
         color :#fff;
+        text-shadow: 1px 1px 2px #222;
 
       }
     }
@@ -512,10 +547,19 @@ export default {
   }
 }
 
+@keyframes bgtrans1 {
+  0% {
+    background: #f82e2700;
+  }
+  100% {
+    background: #d71b14ff;
+  }
+}
+
 @keyframes fontnumberrolling {
   0% {
     transform: rotate(0deg);
-    font-size: 120px;
+    font-size: 240px;
   }
 
   // 50% {
@@ -525,7 +569,7 @@ export default {
 
   100% {
     transform: rotate(720deg);
-    font-size: 24px;
+    font-size: 60px;
   }
 }
 </style>

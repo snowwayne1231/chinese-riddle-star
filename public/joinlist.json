@@ -259,6 +259,22 @@
     {
         "code": "R276",
         "name": "楊傑"
+    },
+    {
+        "code": "R372",
+        "name": "郭若"
+    },
+    {
+        "code": "R373",
+        "name": "劉子瑄"
+    },
+    {
+        "code": "R374",
+        "name": "王鈺雯"
+    },
+    {
+        "code": "R375",
+        "name": "蔡世豐"
     }
   ],
   [
@@ -1131,6 +1147,33 @@
         "role": 3,
         "occupationId": 0,
         "name": "郭若",
+        "countryId": 0,
+        "countryName": "浪",
+        "countryColor": "#A1A1A1,#FFFFFF"
+    },
+    {
+        "code": "R373",
+        "role": 3,
+        "occupationId": 0,
+        "name": "劉子瑄",
+        "countryId": 0,
+        "countryName": "浪",
+        "countryColor": "#A1A1A1,#FFFFFF"
+    },
+    {
+        "code": "R374",
+        "role": 3,
+        "occupationId": 0,
+        "name": "王鈺雯",
+        "countryId": 0,
+        "countryName": "浪",
+        "countryColor": "#A1A1A1,#FFFFFF"
+    },
+    {
+        "code": "R375",
+        "role": 3,
+        "occupationId": 0,
+        "name": "蔡世豐",
         "countryId": 0,
         "countryName": "浪",
         "countryColor": "#A1A1A1,#FFFFFF"
