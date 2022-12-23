@@ -41,7 +41,7 @@
       </div>
       <div class="list">
         <div
-          v-for="(item, index) in list"
+          v-for="(item, index) in showList"
           :key="index"
           class="img-area"
           :class="{
@@ -64,6 +64,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'Tool',
 
@@ -96,27 +97,50 @@ export default {
       // list:人選清單
       list: [],
       // vsList: 對抗清單
-      vsList: [],
+      // vsList: [],
       animationSelectedCode: '',
-      gifts: [],
-      userGiftMap: {},
+      // gifts: [],
+      // userGiftMap: {},
       specialCodes: ['R343', 'R064', 'R008', 'R026', 'R069', 'R179', 'R297'],
-      results: []
+      typed: false,
+      // results: []
     }
   },
 
   computed: {
-    finished() {
-      return this.results.length * 4 === this.list.length
+    ...mapState(['authorized', 'randomPeopleList', 'vsList', 'userGiftMap', 'gifts', 'actionKey']),
+    results() {
+      return this.randomPeopleList;
+    },
+    showList() {
+      const allCodes = this.randomPeopleList.reduce((a,b) => {
+        return a.concat(b)
+      }, []).concat(this.vsList.map(v => v.code));
+      return this.list.map(e => {
+        const _loc = {...e};
+        _loc.disable = allCodes.includes(e.code);
+        return _loc
+      });
     },
     enableList() {
-      return this.list.filter((e) => !e.disable)
+      return this.showList.filter((e) => !e.disable)
     },
-    listObj() {
-      return this.list.reduce(function (target, key, index) {
-        target[key.code] = key
-        return target
-      }, {})
+    // listObj() {
+    //   return this.list.reduce(function (target, key, index) {
+    //     target[key.code] = key
+    //     return target
+    //   }, {})
+    // }
+  },
+
+  watch: {
+    actionKey (a,b) {
+      console.log('watch actionKey a: ', a, 'b: ', b);
+      if (a == 'randCode') {
+        this.randCode(0).then(e => {
+          this.$store.commit('updateState', {actionKey: ''});
+        });
+      }
     }
   },
 
@@ -127,8 +151,8 @@ export default {
         const userMap = {}
         data[1].map((user) => {
           user.countryColor = user.countryColor.split(',')
-          user.disable = false
-          user.userImageDone = true
+          // user.disable = false
+          // user.userImageDone = true
           userMap[user.code] = user
         })
         this.list = data[0]
@@ -146,11 +170,12 @@ export default {
 
   methods: {
     resetGifts() {
-      this.userGiftMap = {}
-      this.gifts = new Array(this.list.length + 7).fill(0).map((val, idx) => idx +1);
+      // this.gifts = new Array(this.list.length + 7).fill(0).map((val, idx) => idx +1);
+      this.$store.commit('updateState', {gifts: new Array(this.list.length + 7).fill(0).map((val, idx) => idx +1), userGiftMap: {}});
     },
     resetVsList() {
-      this.vsList = new Array(4).fill(this.defaultVsObj)
+      // this.vsList = new Array(4).fill(this.defaultVsObj)
+      this.$store.commit('updateState', {vsList: new Array(4).fill(this.defaultVsObj)});
     },
     getUserImgUrl(user) {
       const useUserKey = user.occupationId > 0 ? 'occupationId' : 'role'
@@ -159,21 +184,27 @@ export default {
     },
     onKeyboard(evt) {
       console.log('enter key: ', evt.key)
+      
       switch (evt.key) {
         case 'Enter':
           this.goNext()
           break
         case 'd':
-          window.confirm('移除當前結果嗎?') && this.delete()
+          this.authorized && window.confirm('移除當前結果嗎?') && this.delete()
           break
         case 'r':
-          if (window.confirm('重選玩家嗎?')) {
+          if (this.authorized && window.confirm('重選玩家嗎?')) {
             this.reRandomAgain()
           }
           break
-        // case 'Control':
-        //   this.download()
-        //   break
+        case 'p':
+          // this.download()
+          if (!this.typed && !this.authorized) {
+              const pwd = window.prompt('Enter Password: ');
+              this.$store.dispatch('wsEmitMessage', pwd);
+              this.typed = true;
+          }
+          break
         default:
       }
     },
@@ -185,6 +216,7 @@ export default {
       document.addEventListener('keydown', this.onKeyboard)
     },
     goNext() {
+      if (!this.authorized) return false
       if (this.tmpLock) {
         return
       }
@@ -193,10 +225,11 @@ export default {
       if (vs.filter((e) => e.code == 'R000').length == 0) {
         // 確認滿
         if (window.confirm('重新選取嗎?')) {
-          this.results.push(vs.map((e) => e.code))
-          this.save()
+          const newResults = this.results.slice();
+          newResults.push(vs.map((e) => e.code))
           this.resetVsList()
-          this.$store.commit('updateState', {open: false});
+          this.$store.commit('updateState', {open: false, randomPeopleList: newResults});
+          this.save()
         }
         this.tmpLock = false
       } else {
@@ -204,38 +237,46 @@ export default {
         const ridx = vs.findIndex(e => e.code == 'R000')
         this.randCode(ridx).then(() => {
           this.tmpLock = false
+          this.save();
         })
       }
     },
     randGiftByCode(code) {
       const randGiftIdx = Math.floor(Math.random() * this.gifts.length)
-      const giftNum = this.gifts.splice(randGiftIdx, 1);
-      if (this.userGiftMap[code]) {
-        this.userGiftMap[code] = this.userGiftMap[code].concat(giftNum);
+      const newGifts = this.gifts.slice();
+      const newUserGiftMap = {...this.userGiftMap};
+      const giftNum = newGifts.splice(randGiftIdx, 1);
+      if (newUserGiftMap[code]) {
+        newUserGiftMap[code] = newUserGiftMap[code].concat(giftNum);
       } else {
-        this.userGiftMap[code] = giftNum;
+        newUserGiftMap[code] = giftNum;
       }
+      this.$store.commit('updateState', {gifts: newGifts, userGiftMap: newUserGiftMap});
     },
     randCode(idx) {
-      console.log('randCode left gifts: ', this.gifts);
+      console.log('[randCode] left gifts: ', this.gifts);
+      if (this.authorized) { this.$store.dispatch('makeAction', 'randCode'); }
       return this.enableList.length == 0
         ? new Promise(() => true)
         : this.animationResult()
             .then((code) => {
               console.log('animationResult: ', code)
-              const nextItem = this.list.find((e) => e.code == code)
-              this.randGiftByCode(code);
-              if (this.specialCodes.includes(code)) {
+              if (this.authorized) {
+                const nextItem = this.list.find((e) => e.code == code)
                 this.randGiftByCode(code);
+                if (this.specialCodes.includes(code)) {
+                  this.randGiftByCode(code);
+                }
+                
+                if (idx >= 0 && this.vsList[idx]) {
+                  const nextVsList = this.vsList.slice();
+                  // nextItem.disable = true;
+                  nextVsList[idx] = nextItem;
+                  this.$store.commit('updateState', {vsList: nextVsList});
+                }
+              } else {
+                this.animationSelectedCode = '';
               }
-              
-              if (idx >= 0 && this.vsList[idx]) {
-                const nextVsList = this.vsList.slice();
-                nextItem.disable = true;
-                nextVsList[idx] = nextItem;
-                this.vsList = nextVsList;
-                this.list = this.list.slice()
-              }              
               return code
             })
             .catch((err) => {
@@ -250,13 +291,17 @@ export default {
       }
       const oldCode = this.vsList[handleIndex].code
       return this.randCode(handleIndex).then(() => {
-        const _item = this.list.find((e) => e.code == oldCode)
-        _item.disable = false
-        this.userGiftMap[oldCode].map(gift => {
-          this.gifts.push(gift);
+        // const _item = this.list.find((e) => e.code == oldCode)
+        const newGifts = this.gifts.slice();
+        const newUserGiftMap = {...this.userGiftMap}
+        // _item.disable = false
+        newUserGiftMap[oldCode].map(gift => {
+          newGifts.push(gift);
         });
-        delete this.userGiftMap[oldCode];
-        this.list = this.list.slice()
+        delete newUserGiftMap[oldCode];
+        this.$store.commit('updateState', {gifts: newGifts, userGiftMap: newUserGiftMap});
+        // this.list = this.list.slice()
+        this.save();
       })
     },
     animationResult() {
@@ -286,74 +331,48 @@ export default {
       const _timer = window.setInterval(loopFn, 100)
     },
     save() {
-      const vsResults = this.results;
-      const giftmap = this.userGiftMap;
-      localStorage.setItem('__event12__result__', JSON.stringify(vsResults))
-      localStorage.setItem('__event12__giftmap__', JSON.stringify(giftmap))
+      // const vsResults = this.results;
+      // const giftmap = this.userGiftMap;
+      // localStorage.setItem('__event12__result__', JSON.stringify(vsResults))
+      // localStorage.setItem('__event12__giftmap__', JSON.stringify(giftmap))
+      this.$store.dispatch('updateStateAct', {});
     },
     load() {
-      const resultstr = localStorage.getItem('__event12__result__')
-      const giftmapstr = localStorage.getItem('__event12__giftmap__')
-      if (resultstr) {
-        const _ary = JSON.parse(resultstr)
-        if (typeof _ary == 'object' && Array.isArray(_ary)) {
-          this.results = _ary
-          const codes = this.list.map((e) => e.code)
-          const nextList = this.list.slice()
-          _ary.map((vs) => {
-            vs.map((_) => {
-              const cidx = codes.indexOf(_)
-              if (cidx >= 0) nextList[cidx].disable = true
-            })
-          })
-          this.list = nextList
-        }
-      }
-      if (giftmapstr) {
-        const _map = JSON.parse(giftmapstr);
-        const nextGifts = this.gifts.slice();
-        Object.values(_map).map(gnums => {
-          gnums.map(gnum => {
-            let idx = nextGifts.indexOf(gnum);
-            if (idx >= 0) {
-              nextGifts.splice(idx, 1);
-            }
-          });
-        });
-        this.gifts = nextGifts;
-        this.userGiftMap = _map;;
-      }
+      // const resultstr = localStorage.getItem('__event12__result__')
+      // const giftmapstr = localStorage.getItem('__event12__giftmap__')
+      this.$store.dispatch('wsEmitMessage', 'data');
     },
     delete() {
-      this.results = []
-      this.list.map((e) => {
-        e.disable = false
-      })
-      this.list = this.list.slice()
+      // this.list = this.list.map((e) => {
+      //   const ee = {...e};
+      //   ee.disable = false
+      //   return ee;
+      // });
       this.resetVsList()
       this.resetGifts()
-      localStorage.removeItem('__event12__result__')
-      localStorage.removeItem('__event12__giftmap__')
+      this.$store.dispatch('updateStateAct', {
+        randomPeopleList: [],
+      });
     },
-    download() {
-      let csvContent = 'data:text/csv;charset=utf-8,'
-      const listMap = {}
-      this.list.map((e) => {
-        listMap[e.code] = e
-      })
-      this.results.forEach((ary) => {
-        let vsNames = ary.map(code => `${code} [${listMap[code].name}]`);
-        let row = vsNames.join(',');
-        csvContent += row + '\r\n'
-      })
-      // const universalBOM = '\uFEFF'
-      const encodedUri = encodeURI(csvContent)
-      const link = document.createElement('a')
-      link.setAttribute('href', encodedUri)
-      link.setAttribute('download', 'event9_match.csv')
-      document.body.appendChild(link)
-      link.click()
-    }
+    // download() {
+    //   let csvContent = 'data:text/csv;charset=utf-8,'
+    //   const listMap = {}
+    //   this.list.map((e) => {
+    //     listMap[e.code] = e
+    //   })
+    //   this.results.forEach((ary) => {
+    //     let vsNames = ary.map(code => `${code} [${listMap[code].name}]`);
+    //     let row = vsNames.join(',');
+    //     csvContent += row + '\r\n'
+    //   })
+    //   // const universalBOM = '\uFEFF'
+    //   const encodedUri = encodeURI(csvContent)
+    //   const link = document.createElement('a')
+    //   link.setAttribute('href', encodedUri)
+    //   link.setAttribute('download', 'event9_match.csv')
+    //   document.body.appendChild(link)
+    //   link.click()
+    // }
   }
 }
 </script>
@@ -381,7 +400,7 @@ export default {
     box-sizing: border-box;
     display: inline-block;
     margin: 2px;
-    height: 106px;
+    height: 124px;
 
     &.active {
       .show-block-img {

@@ -2,10 +2,10 @@
     <div id="wraped-app">
         <Tool></Tool>
         <div class="curtain" :class="{open}" @keydown.esc="onCloseCurtain($event)">
-            <Question :currQuestionType="currQuestionType" :currQuestionId="currQuestionId"></Question>
+            <Question :currQuestionType="insetCurrQuestionType" :currQuestionId="insetCurrQuestionId"></Question>
         </div>
-        <div class="check-ws" :class="{shch: !checked}" @click="onClickCheck">新請求 [ 第{{selectQuestionIndex+1}}題 ]</div>
-        <audio id="initAudio" ref="initAudio" autoplay controls loop>
+        <div class="check-ws" :class="{shch: !checked && authorized}" @click="onClickCheck">新請求 [ 第{{selectQuestionIndex+1}}題 ]</div>
+        <audio id="initAudio" ref="initAudio" controls loop :class="{show: authorized}">
             <source src="bg.mp3" type="audio/mp3">
         </audio>
     </div>
@@ -25,40 +25,44 @@ export default {
         }
     },
     computed: {
-        ...mapState(['open', 'checked', 'selectQuestionIndex', 'selectQuestionType']),
-        // currQuestionType() {
-        //     this.selectQuestionType == 'MUSIC' && !this.$refs.paused && this.$refs.initAudio.pause();
-        //     return this.selectQuestionType
-        // },
-        // currQuestionId() {
-        //     return this.selectQuestionIndex
-        // },
+        ...mapState(['open', 'checked', 'selectQuestionIndex', 'selectQuestionType', 'authorized', 'actionKey']),
+        insetCurrQuestionType() {
+            return this.authorized ? this.currQuestionType : this.selectQuestionType;
+        },
+        insetCurrQuestionId() {
+            return this.authorized ? this.currQuestionId : this.selectQuestionIndex;
+        }
     },
     mounted() {
         this.$store.dispatch('wsEmitMessage', 'login');
         this.$refs.initAudio.volume = 0.1;
-        this.$refs.initAudio.play().then(() => {
-            console.log('this: ', this);
-        }).catch(err => {
-            console.log('err: ', err);
-        })
+        // this.$refs.initAudio.play().then(() => {
+        //     console.log('this: ', this);
+        // }).catch(err => {
+        //     console.log('err: ', err);
+        // })
     },
     methods: {
         onCloseCurtain(evt) {
-            this.currQuestionType = '';
-            this.currQuestionId = 0;
-            this.$store.commit('updateState', {open: false});
-            if (this.$refs.initAudio.paused) {
-                this.$refs.initAudio.play();
+            if (this.authorized) {
+                this.currQuestionType = '';
+                this.currQuestionId = 0;
+                this.$store.commit('updateState', {open: false});
+                if (this.$refs.initAudio.paused) {
+                    this.$refs.initAudio.play();
+                }
+                this.$store.dispatch('makeAction', 'closeQuestion');
             }
         },
         onClickCheck() {
+            if (!this.authorized) return false
             this.selectQuestionType == 'MUSIC' && this.$refs.initAudio.pause();
             this.currQuestionType = this.selectQuestionType;
             this.currQuestionId = this.selectQuestionIndex;
             console.log('this.currQuestionType: ', this.currQuestionType)
             console.log('this.currQuestionId: ', this.currQuestionId)
             this.$store.commit('updateState', {open: true, checked: true});
+            this.$store.dispatch('makeAction', 'openQuestion');
         }
     },
     components: {Tool, Question}
@@ -77,8 +81,12 @@ export default {
     z-index: 11;
     opacity: 0;
     transition: opacity .5s linear;
+    visibility: hidden;
     &:hover {
         opacity: 1;
+    }
+    &.show {
+        visibility: visible;
     }
 }
 

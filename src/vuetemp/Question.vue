@@ -50,7 +50,7 @@
 </template>
 
 <script>
-
+import { mapState } from 'vuex'
 export default {
     name: 'Question',
     props: {
@@ -96,6 +96,7 @@ export default {
     },
 
     computed: {
+        ...mapState(['actionKey', 'authorized']),
         currQuestion() {
             const _ = this.list.find((item) => {
                 return item.id == this.currQuestionId && item.type == this.currQuestionType
@@ -105,6 +106,15 @@ export default {
         },
         openAnswer() {
             return this.openAnswerKey == `${this.currQuestionType}_${this.currQuestionId}`;
+        },
+    },
+
+    watch: {
+        actionKey(val) {
+            if (val == 'clickAnswer') {
+                this.$store.commit('updateState', {actionKey: ''});
+                this.onClickAnswerBtn();
+            }
         }
     },
 
@@ -148,15 +158,18 @@ export default {
             this.$refs.questionAudio.play()
         },
         onClickAnswerBtn() {
-            const music = this.currQuestion.musicFileNames[1];
-            if (music) {
-                if (this.$refs.answerAudio.paused) {
-                    this.$refs.answerAudio.play()
-                } else {
-                    this.$refs.answerAudio.pause()
+            if (this.authorized) {
+                this.$store.dispatch('makeAction', 'clickAnswer');
+                const music = this.currQuestion.musicFileNames[1];
+                if (music) {
+                    if (this.$refs.answerAudio.paused) {
+                        this.$refs.answerAudio.play()
+                    } else {
+                        this.$refs.answerAudio.pause()
+                    }
+                } else if (!this.openAnswer) {
+                    this.$refs.openAnswerSound.play();
                 }
-            } else if (!this.openAnswer) {
-                this.$refs.openAnswerSound.play();
             }
             this.openAnswerKey = `${this.currQuestionType}_${this.currQuestionId}`;
         },
